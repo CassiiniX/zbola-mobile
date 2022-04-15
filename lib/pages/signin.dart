@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:http/http.dart' as http;
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'dart:convert';
+import 'dart:async';
+// import 'dart:convert';
 
 import "../helpers/toast.dart";
 import '../widgets/spinner.dart';
@@ -12,16 +13,17 @@ import '../widgets/spinner.dart';
 import '../providers/user.dart';
 
 import "./dashboard.dart";
-import 'dart:async';
 
-class Signin extends StatelessWidget{
+ // ignore: must_be_immutable
+ class Signin extends StatelessWidget{
   bool? isLogin;
 
-  Signin(BuildContext context){
-    this.isLogin = Provider.of<UserProvider>(context)
+  Signin(BuildContext context, {Key? key}) : super(key: key){
+    isLogin = Provider.of<UserProvider>(context)
       .getIsLogin();
   } 
 
+  @override
   Widget build(BuildContext context){
     if(isLogin == true){
       return Dashboard(context);
@@ -31,7 +33,7 @@ class Signin extends StatelessWidget{
       home : Scaffold(      
         backgroundColor : Colors.white,
         body : Padding(
-          padding : EdgeInsets.only(
+          padding : const EdgeInsets.only(
             left : 40,
             right : 40
           ),
@@ -39,30 +41,28 @@ class Signin extends StatelessWidget{
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(                      
-                child: Image.asset(
+              Image.asset(
                   'images/welcome.png',
                   alignment: Alignment.center,
                   width: double.infinity,
                   height: 200,
-                )
-              ),      
+              ),
 
               Container(
-                margin: EdgeInsets.only(top : 25,bottom: 10),
+                margin: const EdgeInsets.only(top : 25,bottom: 10),
                 child: Row( 
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children : [
-                    Text("Masuk",style : TextStyle(fontSize: 16,fontWeight: FontWeight.bold))
+                  children : const [
+                    Text("Masuk",style :  TextStyle(fontSize: 16,fontWeight: FontWeight.bold))
                   ]
                 )
               ),
 
               Container( 
-                margin: EdgeInsets.only(top : 25,bottom: 10),
+                margin: const EdgeInsets.only(top : 25,bottom: 10),
                 child : Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children : [
+                  children : const [
                     Text("Masuk ke akun anda sekarang")
                   ]
                 )
@@ -77,7 +77,7 @@ class Signin extends StatelessWidget{
                       onPressed: (){
                         Navigator.of(context).pushReplacementNamed("/signup");
                       },
-                      child : Text("Belum punya akun?",
+                      child : const Text("Belum punya akun?",
                         style : TextStyle(
                           color: Colors.blueAccent
                         )
@@ -96,10 +96,12 @@ class Signin extends StatelessWidget{
 class SigninScreen extends StatefulWidget{
   final BuildContext parentContext;
 
-  SigninScreen(this.parentContext);
+  // ignore: use_key_in_widget_constructors
+  const SigninScreen(this.parentContext);
 
   @override 
-  SigninScreenState createState() => SigninScreenState(this.parentContext);
+  // ignore: no_logic_in_create_state
+  SigninScreenState createState() => SigninScreenState(parentContext);
 }
 
 class SigninScreenState extends State<SigninScreen>{
@@ -120,30 +122,28 @@ class SigninScreenState extends State<SigninScreen>{
 
   @override 
   Widget build(BuildContext context){
-    return Container(
-      child : Form(
+    return Form(
         key: formKey,
         child: Column(
           children: [
-            EmailField(),
-            PasswordField(),           
+            emailField(),
+            passwordField(),           
             Row(      
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SigninButton()
+                signinButton()
               ]
             ),            
           ],
         ),
-      )
     );
   }
 
-  Widget EmailField(){
+  Widget emailField(){
     return Container( 
-      margin : EdgeInsets.only(top : 10,bottom :10),
+      margin : const EdgeInsets.only(top : 10,bottom :10),
       child : TextFormField(
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: "Email",
         ),
         validator: (value) {        
@@ -164,12 +164,12 @@ class SigninScreenState extends State<SigninScreen>{
     );
   }
 
-  Widget PasswordField(){
+  Widget passwordField(){
     return Container(
-      margin : EdgeInsets.only(top : 10,bottom :10),
+      margin : const EdgeInsets.only(top : 10,bottom :10),
       child : TextFormField(
         obscureText: true,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: "Password",
         ),
         validator: (value){
@@ -190,31 +190,31 @@ class SigninScreenState extends State<SigninScreen>{
     );
   }
 
-  Widget SigninButton(){
+  Widget signinButton(){
     return Container(
-      margin: EdgeInsets.only(top : 30,bottom: 20),
+      margin: const EdgeInsets.only(top : 30,bottom: 20),
       child : ElevatedButton(        
         style : ElevatedButton.styleFrom(
             primary: isLoadingForm == true 
               ? Colors.lightGreen[200] 
               : Colors.lightGreen[600],
             onPrimary: Colors.white,          
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
               fontSize: 14
             ),
-            fixedSize : Size(130,40),
-            shape: StadiumBorder()
+            fixedSize : const Size(130,40),
+            shape: const StadiumBorder()
         ),
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               isLoadingForm == true
-                ? Spinner( icon: Icons.rotate_right )        
+                ? const Spinner( icon: Icons.rotate_right )        
                 : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon( Icons.save),
+                  children: const [
+                    Icon(Icons.save),
                     Padding(
                       padding: EdgeInsets.only(left : 3),
                       child : Text("Kirim",style: TextStyle(fontSize: 14))
@@ -242,7 +242,7 @@ class SigninScreenState extends State<SigninScreen>{
 
     try{   
       // SUCCESS SIMULATION
-      Timer(Duration(seconds: 5), () async{      
+      Timer(const Duration(seconds: 5), () async{      
           var responseBody = <String,dynamic>{
             "access_token" : "TOKEN",
             "user" : <String,dynamic>{
@@ -271,7 +271,7 @@ class SigninScreenState extends State<SigninScreen>{
             .setIsLogin(true);               
       });
     }catch(e){
-      print(e);
+      // print(e);
 
       ToastFailed("Terjadi Kesalahan");
 

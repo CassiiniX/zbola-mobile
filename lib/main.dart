@@ -21,10 +21,13 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final isLogin;
 
-  MyApp(this.isLogin);
+  // ignore: use_key_in_widget_constructors
+  const MyApp(this.isLogin);
 
+  @override
   Widget build(BuildContext context){    
     return MultiProvider(
       providers : [
