@@ -81,8 +81,10 @@ class SidebarScreenState extends State<SidebarScreen>{
 
   List<Widget> subMenu(){
     return <Widget>[
+        Divider(),
+
         ListTile(
-          leading: Icon(Icons.home),
+          leading: Icon(Icons.book_sharp),
           title : Text("Invoice"),
           onTap: (){
             Navigator.of(parentContext).pushReplacementNamed("/invoice");
@@ -92,7 +94,7 @@ class SidebarScreenState extends State<SidebarScreen>{
         Divider(),
 
         ListTile(
-          leading: Icon(Icons.home),
+          leading: Icon(Icons.bookmark),
           title : Text("Riwayat Invoice"),
           onTap: (){
             Navigator.of(parentContext).pushReplacementNamed("/invoice-history");
@@ -105,7 +107,7 @@ class SidebarScreenState extends State<SidebarScreen>{
           title :Row( 
             mainAxisAlignment: MainAxisAlignment.end,
             children : [
-              Icon(Icons.home,color: Colors.red,),
+              Icon(Icons.arrow_back,color: Colors.red,),
               Padding(
                   padding: EdgeInsets.only(left : 3),
                   child: Text("Back",style : TextStyle(color: Colors.red))
@@ -127,7 +129,7 @@ class SidebarScreenState extends State<SidebarScreen>{
             flexibleSpace : Padding(              
                 padding: EdgeInsets.all(20),              
                 child : Container(
-                  decoration: BoxDecoration(color: Colors.red),              
+                  // decoration: BoxDecoration(color: Colors.red),              
                   height: 45,
                   child : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,19 +141,28 @@ class SidebarScreenState extends State<SidebarScreen>{
                         Image.asset(
                             'images/default.png',
                             alignment: Alignment.center,
-                            width: double.infinity,
-                            height: 20,
+                            width: 50,
+                            height: 50,
+                            fit : BoxFit.cover
                         ),
-                        Text("Profil")
+                        Padding(
+                          padding :EdgeInsets.only(left: 10),
+                          child : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                          Text("username",style: TextStyle(color: Colors.white)),
+                          Text("user@gmail.com",style: TextStyle(color: Colors.white),),
+                        ]))
                       ],
                     ),
                     Column(
-                      crossAxisAlignment : CrossAxisAlignment.end,                      
+                      mainAxisAlignment : MainAxisAlignment.end,                      
                       children: [
                         TextButton(                  
-                          child : Icon(Icons.home,color: Colors.white),
+                          child : Icon(Icons.edit,color: Colors.white),
                           onPressed: (){
-                            print("hello");
+                            Navigator.of(parentContext).pushReplacementNamed("/profil");
                           }
                         ),
                       ]
@@ -162,6 +173,8 @@ class SidebarScreenState extends State<SidebarScreen>{
             toolbarHeight : 90,
             automaticallyImplyLeading :  false
           ),
+
+          Divider(),
 
           ListTile(
             leading: Icon(Icons.home),
@@ -174,7 +187,7 @@ class SidebarScreenState extends State<SidebarScreen>{
           Divider(),
 
           ListTile(
-            leading: Icon(Icons.home),
+            leading: Icon(Icons.list_alt),
             title: Text("Lapangan"),
             onTap: (){
               Navigator.of(parentContext).pushReplacementNamed("/field");
@@ -184,7 +197,7 @@ class SidebarScreenState extends State<SidebarScreen>{
           Divider(),
 
           ListTile(
-            leading: Icon(Icons.home),
+            leading: Icon(Icons.book_rounded),
             title : Text("Invoice"),
             onTap: (){
               onShowSubMenu();
@@ -194,7 +207,7 @@ class SidebarScreenState extends State<SidebarScreen>{
           Divider(),
 
           ListTile(
-            leading: Icon(Icons.home),
+            leading: Icon(Icons.money),
             title : Text("Riwayat Pembayaran Manual"),
             onTap: (){
               Navigator.of(parentContext).pushReplacementNamed("/manual-payment-history");
@@ -207,7 +220,7 @@ class SidebarScreenState extends State<SidebarScreen>{
             title :Row( 
               mainAxisAlignment: MainAxisAlignment.end,
               children : [
-                Icon(Icons.home,color: Colors.red,),
+                Icon(Icons.logout,color: Colors.red,),
                 Padding(
                     padding: EdgeInsets.only(left : 3),
                     child: Text("Logout",style : TextStyle(color: Colors.red))

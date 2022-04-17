@@ -12,10 +12,10 @@ import '../providers/user.dart';
 
 import './signin.dart';
 
-class Dashboard extends StatelessWidget{
+class FieldDetail extends StatelessWidget{
   bool? isLogin;
 
-  Dashboard(BuildContext context){
+  FieldDetail(BuildContext context){
     this.isLogin = Provider.of<UserProvider>(context).getIsLogin();
   } 
 
@@ -30,7 +30,7 @@ class Dashboard extends StatelessWidget{
           backgroundColor: Colors.greenAccent[700],
           title : Container(
             alignment: Alignment.center,
-            child : Text("Dashboard")
+            child : Text("Field Detail")
           ),   
           actions: <Widget>[
             IconButton(
@@ -50,7 +50,7 @@ class Dashboard extends StatelessWidget{
         drawer: Sidebar(parentContext: context),
         body : Container(
           alignment: Alignment.center, 
-          child : Text('Dashboard') 
+          child : Text('Field Detail') 
         )
       )
     );

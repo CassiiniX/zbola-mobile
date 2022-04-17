@@ -8,6 +8,12 @@ import './providers/user.dart';
 import "./pages/signin.dart";
 import "./pages/signup.dart";
 import "./pages/dashboard.dart";
+import "./pages/profil.dart";
+import "./pages/invoice.dart";
+import "./pages/invoice-history.dart";
+import "./pages/manual-payment-history.dart";
+import "./pages/field.dart";
+import "./pages/field-detail.dart";
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -41,12 +47,12 @@ class MyApp extends StatelessWidget {
           '/' : (context) => Signin(context),
           '/signup' : (context) => Signup(context),    
           '/dashboard' : (context) => Dashboard(context),     
-          // '/profil' : (context) => Profil(context),
-          // '/invoice' : (context) => Invoice(context),
-          // '/invoice-history' : (context) => InvoiceHistory(context),
-          // '/manual-payment-history' : (context) => ManualPaymentHistory(context),
-          // '/field' : (context) => Field(context),
-          // '/field-detail' : (context) => FieldDetail(context)
+          '/profil' : (context) => Profil(context),
+          '/invoice' : (context) => Invoice(context),
+          '/invoice-history' : (context) => InvoiceHistory(context),
+          '/manual-payment-history' : (context) => ManualPaymentHistory(context),
+          '/field' : (context) => Field(context),
+          '/field-detail' : (context) => FieldDetail(context)
         },
       )    
     );

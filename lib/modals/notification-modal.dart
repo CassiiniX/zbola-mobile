@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-NotificationModal(BuildContext context){
+Widget NotificationModal(BuildContext context){
     return Container(
       height: 400,
       color: Colors.white,
