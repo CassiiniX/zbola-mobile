@@ -327,11 +327,13 @@ class SignupScreenState extends State<SignupScreen>{
     
   //   try{    
   //       var response = await http.post(
-  //         Uri.parse(dotenv.env['API_URL']! + "/signin"),
+  //         Uri.parse(dotenv.env['API_URL']! + "/signup"),
   //         headers : {
   //            "Content-Type": "application/json"
   //         },
   //         body : jsonEncode({
+  //           "username" : username,
+  //           "phone" : phone,
   //           "email" : email,
   //           "password" : password,
   //         })
@@ -350,23 +352,7 @@ class SignupScreenState extends State<SignupScreen>{
   //       }else if(response.statusCode == 500){
   //         ToastFailed(json.decode(response.body)["message"] ?? "Terjadi Kesalahan");
   //       }else if(response.statusCode == 200){
-  //         var responseBody = json.decode(response.body);
-
-  //         final prefs = await SharedPreferences.getInstance();
-
-  //         await prefs.setString('token', 'Bearer '+responseBody["access_token"]);
-          
-  //         Provider.of<UserProvider>(context,listen: false)
-  //           .setUser(<String,dynamic>{
-  //             "id" : responseBody["user"]["id"],
-  //             "username" : responseBody["user"]["username"],
-  //             "email" : responseBody["user"]["email"],
-  //             "photo" : responseBody["user"]["photo"],
-  //             "role"   : responseBody["user"]["role"]
-  //         });
-
-  //         Provider.of<UserProvider>(context,listen: false)
-  //           .setIsLogin(true);                  
+  //          Navigator.of(parentContext).pushReplacementNamed("/");         
   //       }else{
   //         print(response.statusCode);
           

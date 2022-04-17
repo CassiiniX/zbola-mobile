@@ -7,6 +7,7 @@ import './providers/user.dart';
 
 import "./pages/signin.dart";
 import "./pages/signup.dart";
+import "./pages/dashboard.dart";
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -38,7 +39,14 @@ class MyApp extends StatelessWidget {
       child : MaterialApp(
         routes: {
           '/' : (context) => Signin(context),
-          '/signup' : (context) => Signup(context),         
+          '/signup' : (context) => Signup(context),    
+          '/dashboard' : (context) => Dashboard(context),     
+          // '/profil' : (context) => Profil(context),
+          // '/invoice' : (context) => Invoice(context),
+          // '/invoice-history' : (context) => InvoiceHistory(context),
+          // '/manual-payment-history' : (context) => ManualPaymentHistory(context),
+          // '/field' : (context) => Field(context),
+          // '/field-detail' : (context) => FieldDetail(context)
         },
       )    
     );

@@ -68,6 +68,10 @@ flutter:
   assets:
     - .env
     - images/welcome.png
+    - images/404.png
+    - images/invoice-404.png
+    - images/default.png
+    
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

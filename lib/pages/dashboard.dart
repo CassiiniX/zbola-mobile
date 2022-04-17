@@ -5,13 +5,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-// import "../components/sidebar.dart";
+import "../widgets/sidebar.dart";
+import '../modals/notification-modal.dart';
 
 import '../providers/user.dart';
 
 import './signin.dart';
-// import "../providers/product.dart";
-// import "../models/product.dart";
 
 class Dashboard extends StatelessWidget{
   bool? isLogin;
@@ -28,9 +27,29 @@ class Dashboard extends StatelessWidget{
     return MaterialApp(
       home : Scaffold(
         appBar: AppBar(
-          title : Text("Dashboard"),      
+          backgroundColor: Colors.greenAccent[700],
+          title : Container(
+            alignment: Alignment.center,
+            child : Text("Dashboard")
+          ),   
+          actions: <Widget>[
+            IconButton(
+              iconSize: 30,
+              onPressed: (){
+                showModalBottomSheet(
+                  context: context,
+                  builder: NotificationModal(context)
+                );
+              },
+              icon: Icon(Icons.home)
+            ),
+          ]   
         ),
-        body : Text('Hello')
+        drawer: Sidebar(parentContext: context),
+        body : Container(
+          alignment: Alignment.center, 
+          child : Text('Dashboard') 
+        )
       )
     );
   }
