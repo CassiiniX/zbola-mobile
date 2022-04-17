@@ -36,10 +36,15 @@ class Dashboard extends StatelessWidget{
             IconButton(
               iconSize: 30,
               onPressed: (){
-                showModalBottomSheet(
+                showModalBottomSheet(      
+                  backgroundColor: Colors.transparent,         
                   context: context,
+                  isScrollControlled: true,
                   builder: (BuildContext context){
-                    return NotificationModal(context);
+                     return FractionallySizedBox(
+                      heightFactor: 0.8,
+                      child : NotificationModal(context)
+                     );
                   }
                 );
               },
@@ -49,8 +54,19 @@ class Dashboard extends StatelessWidget{
         ),
         drawer: Sidebar(parentContext: context),
         body : Container(
-          alignment: Alignment.center, 
-          child : Text('Dashboard') 
+          margin: EdgeInsets.only(top : 100),
+          child : Column(children: [
+            Image.asset(
+              'images/invoice-404.png',
+              alignment: Alignment.center,
+              width: double.infinity,
+              height: 200,
+            ),
+            Padding(
+              padding : EdgeInsets.only(top : 30),
+              child : Text('Invoice tidak ditemukan',style : TextStyle(fontWeight: FontWeight.bold))
+            )
+          ])
         )
       )
     );
