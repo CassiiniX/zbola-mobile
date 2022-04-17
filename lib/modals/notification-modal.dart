@@ -14,15 +14,19 @@ Widget NotificationModal(BuildContext context){
         padding: EdgeInsets.all(10),
         child: Column(children: [
           Container(  
-             clipBehavior: Clip.none,
+            clipBehavior: Clip.none,
             height: 50,
-  decoration: BoxDecoration(color: Colors.black),
-  child : Stack(
-            clipBehavior: Clip.none ,
-            children : [
+            width: 50,
+            alignment: Alignment.center,    
+            decoration: BoxDecoration(color: Colors.transparent),
+            child : Stack(
+              clipBehavior: Clip.none ,
+              children : [
                 Positioned(
-                  top : -20,
-                  child : Container(
+                  top : -30,    
+                  child : TextButton(onPressed: (){
+                    Navigator.pop(context);
+                  },child: Container(
                     decoration: BoxDecoration(              
                       shape: BoxShape.rectangle,
                       color : Colors.white,
@@ -40,9 +44,12 @@ Widget NotificationModal(BuildContext context){
                     child : Padding(
                       padding: EdgeInsets.all(10),
                       child: Icon(Icons.close,size: 50,color: Colors.redAccent)
-                    )),
-
-          )])),
+                    )
+                  )),
+                )
+              ]
+            )
+          ),
           Text("Notification"),
           Text("Image"),
           Text("Data tidak ditemukan")
