@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 
 import './providers/user.dart';
+import './providers/notification.dart';
 
 import "./pages/signin.dart";
 import "./pages/signup.dart";
@@ -40,6 +41,9 @@ class MyApp extends StatelessWidget {
       providers : [
         ChangeNotifierProvider(
           create: (context) => UserProvider(isLogin)
+        ),      
+        ChangeNotifierProvider(
+          create: (context) => NotificationProvider()
         ),      
       ],
       child : MaterialApp(
