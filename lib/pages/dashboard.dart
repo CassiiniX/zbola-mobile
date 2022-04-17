@@ -41,10 +41,7 @@ class Dashboard extends StatelessWidget{
                   context: context,
                   isScrollControlled: true,
                   builder: (BuildContext context){
-                     return FractionallySizedBox(
-                      heightFactor: 0.8,
-                      child : NotificationModal(context)
-                     );
+                     return NotificationModal(context);                     
                   }
                 );
               },
@@ -64,7 +61,7 @@ class Dashboard extends StatelessWidget{
             ),
             Padding(
               padding : EdgeInsets.only(top : 30),
-              child : Text('Invoice tidak ditemukan',style : TextStyle(fontWeight: FontWeight.bold))
+              child : Text('Data tidak ditemukan',style : TextStyle(fontWeight: FontWeight.bold))
             )
           ])
         )

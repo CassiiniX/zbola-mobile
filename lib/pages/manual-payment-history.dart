@@ -37,7 +37,9 @@ class ManualPaymentHistory extends StatelessWidget{
               iconSize: 30,
               onPressed: (){
                 showModalBottomSheet(
+                  backgroundColor: Colors.transparent,         
                   context: context,
+                  isScrollControlled: true,
                   builder: (BuildContext context){
                     return NotificationModal(context);
                   }
