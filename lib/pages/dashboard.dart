@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'dart:async';
 
 import "../widgets/sidebar.dart";
-import '../modals/notification-modal.dart';
-
+import "../widgets/default-app-bar.dart";
 import '../providers/user.dart';
 
 import './signin.dart';
 
+// ignore: must_be_immutable
 class Dashboard extends StatelessWidget{
   bool? isLogin;
 
-  Dashboard(BuildContext context){
-    this.isLogin = Provider.of<UserProvider>(context).getIsLogin();
+  Dashboard(BuildContext context, {Key? key}) : super(key: key){
+    isLogin = Provider.of<UserProvider>(context).getIsLogin();
   } 
 
+  @override
   Widget build(BuildContext context){
     if(isLogin != true){
       return Signin(context);
@@ -27,29 +24,7 @@ class Dashboard extends StatelessWidget{
 
     return MaterialApp(
       home : Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.greenAccent[700],
-          title : Container(
-            alignment: Alignment.center,
-            child : Text("Dashboard")
-          ),   
-          actions: <Widget>[
-            IconButton(
-              iconSize: 30,
-              onPressed: (){
-                showModalBottomSheet(      
-                  backgroundColor: Colors.transparent,         
-                  context: context,
-                  isScrollControlled: true,
-                  builder: (BuildContext context){
-                     return NotificationModal(context);                     
-                  }
-                );
-              },
-              icon: Icon(Icons.notifications_active)
-            ),
-          ]   
-        ),
+        appBar: defaultAppBar("Dashboard",context),
         drawer: Sidebar(parentContext: context),
         body : DashboardScreen(context)
     ));
@@ -59,9 +34,11 @@ class Dashboard extends StatelessWidget{
 class DashboardScreen extends StatefulWidget{
   final BuildContext parentContext;
 
-  DashboardScreen(this.parentContext);
+  // ignore: use_key_in_widget_constructors
+  const DashboardScreen(this.parentContext);
 
   @override 
+  // ignore: no_logic_in_create_state
   DashboardScreenState createState() => DashboardScreenState(parentContext);
 
 }
@@ -71,20 +48,19 @@ class DashboardScreenState extends State<DashboardScreen>{
 
   DashboardScreenState(this.parentContext);
 
-  Map<String,dynamic>? invoice = null;
-
+  Map<String,dynamic>? invoice;
 
   Future<String> onLoad() async{
     return Future<String>.delayed(
       const Duration(seconds: 2),
       (){
         if(invoice == null){
-          setState(() {
-            invoice = {
-              "id" : "",
-              "status" : ""
-            };
-          });
+          // setState(() {
+          //   invoice = {
+          //     "id" : "",
+          //     "status" : ""
+          //   };
+          // });
         }
 
         return Future.value("Berhasil");
@@ -92,33 +68,31 @@ class DashboardScreenState extends State<DashboardScreen>{
       });    
   }
 
+  @override
   Widget build(BuildContext context){
     return FutureBuilder(
       future: onLoad(),
       builder: (ctx,snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
-            return Center(
-              child: CircularProgressIndicator(),
+            return const Center(
+              child: CircularProgressIndicator(color: Colors.greenAccent),
             );
           }
 
           if(snapshot.error != null){
-            return Center(
-              child: Text("Terjadi Kesalahan"),
+            return const Center(
+              child: Text("Terjadi Kesalahan",style : TextStyle(color: Colors.red)),
             );
           }   
 
          return Padding(
-          padding: EdgeInsets.only(top: 10,right : 10,left: 10,bottom : 50),
+          padding: const EdgeInsets.only(top: 10,right : 10,left: 10,bottom : 50),
           child: RefreshIndicator(
-            onRefresh: () async {
-              print("Refresh");
-            },
-
+            onRefresh: () async => onLoad(),            
             child : invoice != null 
-              ? Text("Invoice")
+              ? const Text("Invoice Found")
               : Container(
-                margin: EdgeInsets.only(top : 100),
+                margin: const EdgeInsets.only(top : 100),
                 child : Column(
                     children: [
                       Image.asset(
@@ -127,7 +101,7 @@ class DashboardScreenState extends State<DashboardScreen>{
                       width: double.infinity,
                       height: 200,
                     ),
-                    Padding(
+                    const Padding(
                       padding : EdgeInsets.only(top : 30),
                       child : Text('Data tidak ditemukan',style : TextStyle(fontWeight: FontWeight.bold))
                     )

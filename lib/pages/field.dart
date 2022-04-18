@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import "../widgets/sidebar.dart";
-import '../modals/notification-modal.dart';
+import "../widgets/default-app-bar.dart";
 
 import '../providers/user.dart';
 
@@ -26,29 +26,7 @@ class Field extends StatelessWidget{
 
     return MaterialApp(
       home : Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.greenAccent[700],
-          title : Container(
-            alignment: Alignment.center,
-            child : Text("Field")
-          ),   
-          actions: <Widget>[
-            IconButton(
-              iconSize: 30,
-              onPressed: (){
-                showModalBottomSheet(
-                  backgroundColor: Colors.transparent,         
-                  context: context,
-                  isScrollControlled: true,
-                  builder: (BuildContext context){
-                    return NotificationModal(context);
-                  }
-                );
-              },
-              icon: Icon(Icons.notifications_active)
-            ),
-          ]   
-        ),
+        appBar: defaultAppBar("Field",context),
         drawer: Sidebar(parentContext: context),
         body : Container(
           alignment: Alignment.center, 
