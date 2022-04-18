@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
@@ -7,6 +9,8 @@ import "../widgets/default-app-bar.dart";
 import '../providers/user.dart';
 
 import './signin.dart';
+import 'package:flutter/services.dart' show rootBundle;
+
 
 // ignore: must_be_immutable
 class Dashboard extends StatelessWidget{
@@ -50,22 +54,30 @@ class DashboardScreenState extends State<DashboardScreen>{
 
   Map<String,dynamic>? invoice;
 
-  Future<String> onLoad() async{
-    return Future<String>.delayed(
-      const Duration(seconds: 2),
-      (){
-        if(invoice == null){
-          // setState(() {
-          //   invoice = {
-          //     "id" : "",
-          //     "status" : ""
-          //   };
-          // });
-        }
+  Future<String> getJson() {
+    return rootBundle.loadString('json/invoice.json');
+  }
 
-        return Future.value("Berhasil");
-        // return Future.error("Terjadi Kesalahan");
-      });    
+  Future<String> onLoad() async{
+    try{
+      return Future<String>.delayed(
+        const Duration(seconds: 2),
+        () async {
+          if(invoice == null){
+            var jsonInvoice = json.decode(await getJson());
+            
+            setState((){
+              invoice = jsonInvoice;
+            });
+          }
+
+          return Future.value("Berhasil");
+        });    
+    }catch(e){
+      print(e);
+      
+      return Future.error("Terjadi Kesalahan");
+    }
   }
 
   @override

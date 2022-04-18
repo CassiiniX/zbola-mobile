@@ -1,0 +1,51 @@
+{
+    "invoice": {
+      "id": 2,
+      "user_id": 103,
+      "product_id": 1,
+      "status": "running",
+      "start_rent": "2022-03-25 08:00:00",
+      "hour": 4,
+      "total": 244588,
+      "created_at": "2022-03-17T04:23:02.000000Z",
+      "updated_at": "2022-03-17T04:25:11.000000Z",
+      "get_human_created_at": "1 bulan yang lalu",
+      "get_human_updated_at": "1 bulan yang lalu",
+      "product": {
+        "id": 1,
+        "address": "address 1",
+        "star": 5,
+        "description": "Deskripsi",
+        "fasilitas": "Fasilitas",
+        "quesation": "Pertanyaan",
+        "price": 61147,
+        "rent": 1,
+        "images": "[\"7.png\"]",
+        "status": "active",
+        "created_at": "2022-03-16T05:11:51.000000Z",
+        "updated_at": "2022-03-17T04:28:27.000000Z",
+        "get_human_created_at": "1 bulan yang lalu",
+        "get_human_updated_at": "1 bulan yang lalu",
+        "get_star": "<i class='fe fe-star' style='color:green'></i><i class='fe fe-star' style='color:green'></i><i class='fe fe-star' style='color:green'></i><i class='fe fe-star' style='color:green'></i><i class='fe fe-star' style='color:green'></i>",
+        "get_images": [
+          "7.png"
+        ]
+      },
+      "manual_payment": [
+        {
+          "id": 1,
+          "user_id": 103,
+          "invoice_id": 2,
+          "proof": "Ha5nWa35xHGSb6mz.png",
+          "description": "test",
+          "status": "success",
+          "created_at": "2022-03-17T04:24:41.000000Z",
+          "updated_at": "2022-03-17T04:25:07.000000Z",
+          "get_human_created_at": "1 bulan yang lalu",
+          "get_human_updated_at": "1 bulan yang lalu"
+        }
+      ]
+    },
+    "expired_payment": "2022-03-20 11:23:02",
+    "end_rent": "2022-03-25 12:00:00"
+  }
