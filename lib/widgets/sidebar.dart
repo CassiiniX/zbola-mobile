@@ -5,17 +5,14 @@ import 'package:provider/provider.dart';
 import '../providers/user.dart';
 
 class Sidebar extends StatelessWidget{
+  // ignore: prefer_typing_uninitialized_variables
   final parentContext;
 
-  Sidebar({
-    @required this.parentContext
-  });
+  const Sidebar({@required this.parentContext,Key? key}) : super(key: key);
 
   @override 
   Widget build(BuildContext context){
-    return Drawer(
-      child : SidebarScreen(parentContext)
-    );
+    return Drawer(child : SidebarScreen(parentContext));
   }
 }
 
@@ -38,16 +35,9 @@ class SidebarScreenState extends State<SidebarScreen>{
   SidebarScreenState(this.parentContext);
 
   @override 
-  void dispose(){    
-    super.dispose();
-  }
-
-  @override 
   Widget build(BuildContext context){
     return Column(
-        children: isShowSubMenu == true 
-          ? subMenu() 
-          : mainMenu()
+        children: isShowSubMenu == true ? subMenu() : mainMenu()
     );
   }
 
@@ -68,45 +58,36 @@ class SidebarScreenState extends State<SidebarScreen>{
 
     await prefs.remove('token');
 
-    // await prefs.remove("user");
-
     Provider.of<UserProvider>(context,listen : false).setIsLogin(false);
-
-    // await Future.delayed(Duration(seconds: 30));
     
     Navigator.of(context).pushReplacementNamed("/");     
-    
-    // Navigator.of(context).pop();           
   }
 
   List<Widget> subMenu(){
-    return <Widget>[
-        Divider(),
+    return <Widget>
+      [
+        const Divider(),
 
         ListTile(
-          leading: Icon(Icons.book_sharp),
-          title : Text("Invoice"),
-          onTap: (){
-            Navigator.of(parentContext).pushReplacementNamed("/invoice");
-          },
+          leading: const Icon(Icons.book_sharp),
+          title : const Text("Invoice"),
+          onTap: () => Navigator.of(parentContext).pushReplacementNamed("/invoice")        
         ),
 
-        Divider(),
+        const Divider(),
 
         ListTile(
-          leading: Icon(Icons.bookmark),
-          title : Text("Riwayat Invoice"),
-          onTap: (){
-            Navigator.of(parentContext).pushReplacementNamed("/invoice-history");
-          },
+          leading: const Icon(Icons.bookmark),
+          title : const Text("Riwayat Invoice"),
+          onTap: () => Navigator.of(parentContext).pushReplacementNamed("/invoice-history")          
         ),
 
-        Divider(),
+        const Divider(),
 
         ListTile(          
           title :Row( 
             mainAxisAlignment: MainAxisAlignment.end,
-            children : [
+            children : const [
               Icon(Icons.arrow_back,color: Colors.red,),
               Padding(
                   padding: EdgeInsets.only(left : 3),
@@ -114,24 +95,23 @@ class SidebarScreenState extends State<SidebarScreen>{
               )
             ]
           ),
-          onTap: () => {
-            onHideSubMenu()
-          }
+          onTap: () => onHideSubMenu()          
         )
-    ];
+      ];
   }
 
   List<Widget> mainMenu(){
-    return <Widget>[
+    return <Widget>
+      [
           AppBar(
-            backgroundColor: Colors.greenAccent[700],
-            // title: Text("Menu"),
+            backgroundColor: Colors.greenAccent[700],        
+            toolbarHeight : 90,
+            automaticallyImplyLeading :  false,
             flexibleSpace : Padding(              
-                padding: EdgeInsets.all(20),              
-                child : Container(
-                  // decoration: BoxDecoration(color: Colors.red),              
-                  height: 45,
-                  child : Row(
+              padding: const EdgeInsets.all(20),              
+              child : SizedBox(              
+                height: 45,
+                child : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   textBaseline: TextBaseline.alphabetic,                
@@ -146,80 +126,70 @@ class SidebarScreenState extends State<SidebarScreen>{
                             fit : BoxFit.cover
                         ),
                         Padding(
-                          padding :EdgeInsets.only(left: 10),
+                          padding : const EdgeInsets.only(left: 10),
                           child : Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                          Text("username",style: TextStyle(color: Colors.white)),
-                          Text("user@gmail.com",style: TextStyle(color: Colors.white),),
-                        ]))
+                            children: const [
+                              Text("username",style: TextStyle(color: Colors.white)),
+                              Text("user@gmail.com",style: TextStyle(color: Colors.white)),
+                            ]
+                          )
+                        )
                       ],
                     ),
                     Column(
                       mainAxisAlignment : MainAxisAlignment.end,                      
                       children: [
                         TextButton(                  
-                          child : Icon(Icons.edit,color: Colors.white),
-                          onPressed: (){
-                            Navigator.of(parentContext).pushReplacementNamed("/profil");
-                          }
+                          child : const Icon(Icons.edit,color: Colors.white),
+                          onPressed: () => Navigator.of(parentContext).pushReplacementNamed("/profil")                          
                         ),
                       ]
                     ),
                   ],
                 ))              
             ),
-            toolbarHeight : 90,
-            automaticallyImplyLeading :  false
           ),
 
-          Divider(),
+          const Divider(),
 
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text("Dashboard"),
-            onTap: (){
-              Navigator.of(parentContext).pushReplacementNamed("/dashboard");
-            }
+            leading: const Icon(Icons.home),
+            title: const Text("Dashboard"),
+            onTap: () => Navigator.of(parentContext).pushReplacementNamed("/dashboard")            
           ),
 
-          Divider(),
+          const Divider(),
 
           ListTile(
-            leading: Icon(Icons.list_alt),
-            title: Text("Lapangan"),
-            onTap: (){
-              Navigator.of(parentContext).pushReplacementNamed("/field");
-            }
+            leading: const Icon(Icons.list_alt),
+            title: const Text("Lapangan"),
+            onTap: () => Navigator.of(parentContext).pushReplacementNamed("/field")            
           ),
 
-          Divider(),
+          const Divider(),
 
           ListTile(
-            leading: Icon(Icons.book_rounded),
-            title : Text("Invoice"),
-            onTap: (){
-              onShowSubMenu();
-            },
+            leading: const Icon(Icons.book_rounded),
+            title : const Text("Invoice"),
+            onTap: () => onShowSubMenu()
           ),
 
-          Divider(),
+          const Divider(),
 
           ListTile(
-            leading: Icon(Icons.money),
-            title : Text("Riwayat Pembayaran Manual"),
-            onTap: (){
-              Navigator.of(parentContext).pushReplacementNamed("/manual-payment-history");
-            },
+            leading: const Icon(Icons.money),
+            title : const Text("Riwayat Pembayaran Manual"),
+            onTap: () => Navigator.of(parentContext).pushReplacementNamed("/manual-payment-history")            
           ),
 
-          Divider(),
+          const Divider(),
 
           ListTile(          
             title :Row( 
               mainAxisAlignment: MainAxisAlignment.end,
-              children : [
+              children : const [
                 Icon(Icons.logout,color: Colors.red,),
                 Padding(
                     padding: EdgeInsets.only(left : 3),
@@ -229,6 +199,6 @@ class SidebarScreenState extends State<SidebarScreen>{
             ),
             onTap: () => onLogout(parentContext)
           )
-        ];
+      ];
   }
 }
