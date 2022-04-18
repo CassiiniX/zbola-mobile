@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:async';
 
 import "../widgets/sidebar.dart";
 import '../modals/notification-modal.dart';
@@ -50,22 +51,71 @@ class Dashboard extends StatelessWidget{
           ]   
         ),
         drawer: Sidebar(parentContext: context),
-        body : Container(
-          margin: EdgeInsets.only(top : 100),
-          child : Column(children: [
-            Image.asset(
-              'images/invoice-404.png',
-              alignment: Alignment.center,
-              width: double.infinity,
-              height: 200,
-            ),
-            Padding(
-              padding : EdgeInsets.only(top : 30),
-              child : Text('Data tidak ditemukan',style : TextStyle(fontWeight: FontWeight.bold))
-            )
-          ])
-        )
-      )
+        body : DashboardScreen(context)
+    ));
+  }
+}
+
+class DashboardScreen extends StatefulWidget{
+  final BuildContext parentContext;
+
+  DashboardScreen(this.parentContext);
+
+  @override 
+  DashboardScreenState createState() => DashboardScreenState(parentContext);
+
+}
+
+class DashboardScreenState extends State<DashboardScreen>{
+  final BuildContext parentContext;
+
+  DashboardScreenState(this.parentContext);
+
+  Map<String,dynamic>? invoice = null;
+
+  Future<void> onLoad() async{
+    Timer(const Duration(seconds: 3), () async{   
+      setState(() {
+       invoice = {
+         "id" : "",
+         "status" : ""
+       };
+      });
+    });
+  }
+
+  Widget build(BuildContext context){
+    return FutureBuilder(
+      future: onLoad(),
+      builder: (ctx,snapshot){
+         return Padding(
+          padding: EdgeInsets.only(top: 10,right : 10,left: 10,bottom : 50),
+          child: RefreshIndicator(
+            onRefresh: () async {
+              print("Refresh");
+            },
+
+            child : invoice != null 
+              ? Text("Invoice")
+              : Container(
+                margin: EdgeInsets.only(top : 100),
+                child : Column(
+                    children: [
+                      Image.asset(
+                      'images/invoice-404.png',
+                      alignment: Alignment.center,
+                      width: double.infinity,
+                      height: 200,
+                    ),
+                    Padding(
+                      padding : EdgeInsets.only(top : 30),
+                      child : Text('Data tidak ditemukan',style : TextStyle(fontWeight: FontWeight.bold))
+                    )
+                  ]
+                )
+              )
+          ));
+      }
     );
   }
 }
