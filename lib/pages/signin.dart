@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dart:async';
-// import 'dart:convert';
 
 import "../helpers/toast.dart";
 import '../widgets/spinner.dart';
@@ -19,8 +16,7 @@ import "./dashboard.dart";
   bool? isLogin;
 
   Signin(BuildContext context, {Key? key}) : super(key: key){
-    isLogin = Provider.of<UserProvider>(context)
-      .getIsLogin();
+    isLogin = Provider.of<UserProvider>(context).getIsLogin();
   } 
 
   @override
@@ -77,10 +73,7 @@ import "./dashboard.dart";
                       onPressed: (){
                         Navigator.of(context).pushReplacementNamed("/signup");
                       },
-                      child : const Text("Belum punya akun?",
-                        style : TextStyle(
-                          color: Colors.blueAccent
-                        )
+                      child : const Text("Belum punya akun?",style : TextStyle(color: Colors.blueAccent)
                     )
                   )
                 ]
@@ -195,22 +188,18 @@ class SigninScreenState extends State<SigninScreen>{
       margin: const EdgeInsets.only(top : 30,bottom: 20),
       child : ElevatedButton(        
         style : ElevatedButton.styleFrom(
-            primary: isLoadingForm == true 
-              ? Colors.lightGreen[200] 
-              : Colors.lightGreen[600],
-            onPrimary: Colors.white,          
-            textStyle: const TextStyle(
-              fontSize: 14
-            ),
-            fixedSize : const Size(130,40),
-            shape: const StadiumBorder()
+          primary: isLoadingForm == true ? Colors.lightGreen[200] : Colors.lightGreen[600],
+          onPrimary: Colors.white,          
+          textStyle: const TextStyle(fontSize: 14),
+          fixedSize : const Size(130,40),
+          shape: const StadiumBorder()
         ),
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               isLoadingForm == true
-                ? const Spinner( icon: Icons.rotate_right )        
+                ? const Spinner(icon: Icons.rotate_right)        
                 : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
@@ -241,7 +230,6 @@ class SigninScreenState extends State<SigninScreen>{
     });
 
     try{   
-      // SUCCESS SIMULATION
       Timer(const Duration(seconds: 5), () async{      
           var responseBody = <String,dynamic>{
             "access_token" : "TOKEN",
@@ -271,78 +259,11 @@ class SigninScreenState extends State<SigninScreen>{
             .setIsLogin(true);               
       });
     }catch(e){
-      // print(e);
-
-      ToastFailed("Terjadi Kesalahan");
+      toastFailed("Terjadi Kesalahan");
 
       setState(() {    
         isLoadingForm = false;
       });
     }  
   }
-
-  // void onSubmit() async {
-  //   if(isLoadingForm) return;
-
-  //   setState(() {    
-  //     isLoadingForm = true;
-  //   });    
-    
-  //   try{    
-  //       var response = await http.post(
-  //         Uri.parse(dotenv.env['API_URL']! + "/signin"),
-  //         headers : {
-  //            "Content-Type": "application/json"
-  //         },
-  //         body : jsonEncode({
-  //           "email" : email,
-  //           "password" : password,
-  //         })
-  //       );    
-
-  //       if(response.statusCode != 200){
-  //         setState(() {    
-  //           isLoadingForm = false;
-  //         });
-  //       }
-
-  //       if(response.statusCode == 404){
-  //         ToastFailed("Url tidak ditemukan");         
-  //       }else if(response.statusCode == 422){        
-  //         ToastFailed(json.decode(response.body)["message"] ?? "Terjadi Kesalahan");
-  //       }else if(response.statusCode == 500){
-  //         ToastFailed(json.decode(response.body)["message"] ?? "Terjadi Kesalahan");
-  //       }else if(response.statusCode == 200){
-  //         var responseBody = json.decode(response.body);
-
-  //         final prefs = await SharedPreferences.getInstance();
-
-  //         await prefs.setString('token', 'Bearer '+responseBody["access_token"]);
-          
-  //         Provider.of<UserProvider>(context,listen: false)
-  //           .setUser(<String,dynamic>{
-  //             "id" : responseBody["user"]["id"],
-  //             "username" : responseBody["user"]["username"],
-  //             "email" : responseBody["user"]["email"],
-  //             "photo" : responseBody["user"]["photo"],
-  //             "role"   : responseBody["user"]["role"]
-  //         });
-
-  //         Provider.of<UserProvider>(context,listen: false)
-  //           .setIsLogin(true);                  
-  //       }else{
-  //         print(response.statusCode);
-          
-  //         ToastFailed("Terjadi Kesalahan");
-  //       }
-  //   }catch(e){
-  //     print(e);
-
-  //     ToastFailed("Terjadi Kesalahan");
-
-  //     setState(() {    
-  //       isLoadingForm = false;
-  //     });
-  //   }
-  // }
 }

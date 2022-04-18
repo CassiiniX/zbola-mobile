@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dart:async';
-// import 'dart:convert';
 
 import "../helpers/toast.dart";
 import '../widgets/spinner.dart';
@@ -79,10 +75,7 @@ import "./dashboard.dart";
                       onPressed: (){
                         Navigator.of(context).pushReplacementNamed("/");
                       },
-                      child : const Text("Sudah punya akun?",
-                        style : TextStyle(
-                          color: Colors.blueAccent
-                        )
+                      child : const Text("Sudah punya akun?",style : TextStyle(color: Colors.blueAccent)
                     )
                   )
                 ]
@@ -91,7 +84,7 @@ import "./dashboard.dart";
           )
         )
       )
-    )
+      )
     );
   }
 }
@@ -187,10 +180,10 @@ class SignupScreenState extends State<SignupScreen>{
           },
         ),
         Padding(
-          padding : EdgeInsets.only(top : 10,bottom: 2),
+          padding : const EdgeInsets.only(top : 10,bottom: 2),
           child : Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [
+          children: const [
             Text("No telp harus *08",style : TextStyle(color: Colors.lightBlue,fontSize: 12))
           ]
         ))
@@ -255,22 +248,18 @@ class SignupScreenState extends State<SignupScreen>{
       margin: const EdgeInsets.only(top : 30,bottom: 20),
       child : ElevatedButton(        
         style : ElevatedButton.styleFrom(
-            primary: isLoadingForm == true 
-              ? Colors.lightGreen[200] 
-              : Colors.lightGreen[600],
-            onPrimary: Colors.white,          
-            textStyle: const TextStyle(
-              fontSize: 14
-            ),
-            fixedSize : const Size(130,40),
-            shape: const StadiumBorder()
+          primary: isLoadingForm == true ? Colors.lightGreen[200] : Colors.lightGreen[600],
+          onPrimary: Colors.white,          
+          textStyle: const TextStyle(fontSize: 14),
+          fixedSize : const Size(130,40),
+          shape: const StadiumBorder()
         ),
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               isLoadingForm == true
-                ? const Spinner( icon: Icons.rotate_right )        
+                ? const Spinner(icon: Icons.rotate_right)        
                 : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
@@ -301,71 +290,17 @@ class SignupScreenState extends State<SignupScreen>{
     });
 
     try{   
-      ToastSuccess("Berhasil mendaftarkan user");
+      toastSuccess("Berhasil mendaftarkan user");
 
-      // SUCCESS SIMULATION
       Timer(const Duration(seconds: 5), () async{    
         Navigator.of(parentContext).pushReplacementNamed("/");         
       });
     }catch(e){
-      // print(e);
-
-      ToastFailed("Terjadi Kesalahan");
+      toastFailed("Terjadi Kesalahan");
 
       setState(() {    
         isLoadingForm = false;
       });
     }  
   }
-
-  // void onSubmit() async {
-  //   if(isLoadingForm) return;
-
-  //   setState(() {    
-  //     isLoadingForm = true;
-  //   });    
-    
-  //   try{    
-  //       var response = await http.post(
-  //         Uri.parse(dotenv.env['API_URL']! + "/signup"),
-  //         headers : {
-  //            "Content-Type": "application/json"
-  //         },
-  //         body : jsonEncode({
-  //           "username" : username,
-  //           "phone" : phone,
-  //           "email" : email,
-  //           "password" : password,
-  //         })
-  //       );    
-
-  //       if(response.statusCode != 200){
-  //         setState(() {    
-  //           isLoadingForm = false;
-  //         });
-  //       }
-
-  //       if(response.statusCode == 404){
-  //         ToastFailed("Url tidak ditemukan");         
-  //       }else if(response.statusCode == 422){        
-  //         ToastFailed(json.decode(response.body)["message"] ?? "Terjadi Kesalahan");
-  //       }else if(response.statusCode == 500){
-  //         ToastFailed(json.decode(response.body)["message"] ?? "Terjadi Kesalahan");
-  //       }else if(response.statusCode == 200){
-  //          Navigator.of(parentContext).pushReplacementNamed("/");         
-  //       }else{
-  //         print(response.statusCode);
-          
-  //         ToastFailed("Terjadi Kesalahan");
-  //       }
-  //   }catch(e){
-  //     print(e);
-
-  //     ToastFailed("Terjadi Kesalahan");
-
-  //     setState(() {    
-  //       isLoadingForm = false;
-  //     });
-  //   }
-  // }
 }

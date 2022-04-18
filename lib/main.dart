@@ -21,9 +21,7 @@ void main() async {
 
   final prefs = await SharedPreferences.getInstance();
 
-  final isLogin = prefs.getString('token') != null 
-    ? true
-    : false;
+  final isLogin = prefs.getString('token') != null ? true : false;
 
   runApp(MyApp(isLogin));
 }

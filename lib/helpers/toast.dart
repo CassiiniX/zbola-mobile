@@ -1,7 +1,7 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 
-void ToastSuccess(String message){
+void toastSuccess(String message){
   Fluttertoast.showToast(
     msg: message,
     toastLength: Toast.LENGTH_LONG,
@@ -13,7 +13,7 @@ void ToastSuccess(String message){
   );
 }
 
-void ToastFailed(String message){
+void toastFailed(String message){
   Fluttertoast.showToast(
     msg: message,
     toastLength: Toast.LENGTH_LONG,
