@@ -73,21 +73,41 @@ class DashboardScreenState extends State<DashboardScreen>{
 
   Map<String,dynamic>? invoice = null;
 
-  Future<void> onLoad() async{
-    Timer(const Duration(seconds: 3), () async{   
-      setState(() {
-       invoice = {
-         "id" : "",
-         "status" : ""
-       };
-      });
-    });
+
+  Future<String> onLoad() async{
+    return Future<String>.delayed(
+      const Duration(seconds: 2),
+      (){
+        if(invoice == null){
+          setState(() {
+            invoice = {
+              "id" : "",
+              "status" : ""
+            };
+          });
+        }
+
+        return Future.value("Berhasil");
+        // return Future.error("Terjadi Kesalahan");
+      });    
   }
 
   Widget build(BuildContext context){
     return FutureBuilder(
       future: onLoad(),
       builder: (ctx,snapshot){
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          if(snapshot.error != null){
+            return Center(
+              child: Text("Terjadi Kesalahan"),
+            );
+          }   
+
          return Padding(
           padding: EdgeInsets.only(top: 10,right : 10,left: 10,bottom : 50),
           child: RefreshIndicator(
