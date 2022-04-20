@@ -88,9 +88,9 @@ class DashboardScreenState extends State<DashboardScreen>{
       future: onLoad(),
       builder: (ctx,snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
-            return Center(
+            return const Center(
               heightFactor:  15,
-              child: const CircularProgressIndicator(color: Colors.greenAccent),
+              child: CircularProgressIndicator(color: Colors.greenAccent),
             );
           }
 
@@ -116,10 +116,10 @@ class DashboardScreenState extends State<DashboardScreen>{
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,                    
                     borderRadius: const BorderRadius.only(
-                      topLeft : Radius.circular(20),
-                      topRight : Radius.circular(20),
-                      bottomLeft: Radius.circular(20),
-                      bottomRight : Radius.circular(20)
+                      topLeft : Radius.circular(10),
+                      topRight : Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight : Radius.circular(10)
                     ),
                     color : Colors.white,
                     boxShadow:  [
@@ -139,8 +139,8 @@ class DashboardScreenState extends State<DashboardScreen>{
                         decoration: const BoxDecoration(
                           shape: BoxShape.rectangle,                    
                           borderRadius: BorderRadius.only(
-                            topLeft : Radius.circular(20),
-                            topRight : Radius.circular(20),
+                            topLeft : Radius.circular(10),
+                            topRight : Radius.circular(10),
                           )                                                
                         ),
                         child : Image.asset(
@@ -248,46 +248,82 @@ class DashboardScreenState extends State<DashboardScreen>{
                           offset: const Offset(0, 1), // changes position of shadow
                         )
                       ]),
-                      child: Padding(padding : EdgeInsets.all(20),child : Column(children: [
+                      child: Padding(padding : const EdgeInsets.all(20),child : Column(children: [
                        Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding : EdgeInsets.only(right: 5,left : 5),
-                                child : Column(children: [
-                                  Text("2",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
+                                padding : const EdgeInsets.only(right: 5,left : 5),
+                                child : Column(children: const [
+                                  Text("2",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 25)),
                                   Divider(thickness : 0),
                                   Text("Hari",style : TextStyle(fontSize :10))
                                 ])
                               ),
-                                Padding(
-                                padding : EdgeInsets.only(right: 5,left : 5),
-                                child : Column(children: [
-                                  Text("12",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
-                                  Divider(thickness : 0),
-                                  Text("Jam",style : TextStyle(fontSize :10))
-                                ])
-                              ),
-                                Padding(
-                                padding : EdgeInsets.only(right: 5,left : 5),
-                                child : Column(children: [
-                                  Text("40",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
-                                  Divider(thickness : 0),
-                                  Text("Menit",style : TextStyle(fontSize :10))
+                              Padding(
+                                padding : const EdgeInsets.only(right: 5,left : 5),
+                                child : Column(children:[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: const [
+                                      Padding(
+                                        padding: EdgeInsets.only(right : 10),
+                                        child : Text(":",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 25))
+                                      ),
+                                      Text("12",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 25))
+                                    ]
+                                  ),
+                                  const Divider(thickness : 0),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left : 10),
+                                    child : Text("Jam",style : TextStyle(fontSize :10))
+                                  )
                                 ])
                               ),
                               Padding(
-                                padding : EdgeInsets.only(right: 5,left : 5),
+                                padding : const EdgeInsets.only(right: 5,left : 5),
                                 child : Column(children: [
-                                  Text("20",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
-                                  Divider(thickness : 0),
-                                  Text("Detik",style : TextStyle(fontSize :10))
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: const [
+                                      Padding(
+                                        padding: EdgeInsets.only(right : 10),
+                                        child : Text(":",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 25))
+                                      ),
+                                      Text("12",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 25))
+                                    ]
+                                  ),
+                                  const Divider(thickness : 0),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left : 10),
+                                    child: Text("Menit",style : TextStyle(fontSize :10))
+                                  )
+                                ])
+                              ),
+                              Padding(
+                                padding : const EdgeInsets.only(right: 5,left : 5),
+                                child : Column(children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: const [
+                                      Padding(
+                                        padding: EdgeInsets.only(right : 10),
+                                        child : Text(":",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 25))
+                                      ),
+                                      Text("12",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 25))
+                                    ]
+                                  ),
+                                  const Divider(thickness : 0),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left : 10),
+                                    child : Text("Detik",style : TextStyle(fontSize :10))
+                                  )
                                 ])
                               ),
                         ]),                        
                         Container(
-                          margin : EdgeInsets.only(top : 10,bottom : 10),
-                          child : Text("Menunggu divalidasi admin",style : TextStyle(fontSize :10))
+                          margin : const EdgeInsets.only(top : 15,bottom : 10),
+                          child : const Text("*Menunggu divalidasi admin",style : TextStyle(fontSize :10))
                         )
                     ])
                   ))
