@@ -28,7 +28,8 @@ import "./dashboard.dart";
     return MaterialApp(
       home : Scaffold(      
         backgroundColor : Colors.white,
-        body : Padding(
+        body : SingleChildScrollView(
+          child : Padding(
           padding : const EdgeInsets.only(
             left : 40,
             right : 40
@@ -82,7 +83,7 @@ import "./dashboard.dart";
           )
         )
       )
-    );
+    ));
   }
 }
 
