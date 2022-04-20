@@ -30,7 +30,9 @@ class Dashboard extends StatelessWidget{
       home : Scaffold(
         appBar: defaultAppBar("Dashboard",context),
         drawer: Sidebar(parentContext: context),
-        body : DashboardScreen(context)
+        body : SingleChildScrollView(        
+            child : DashboardScreen(context)
+          )        
     ));
   }
 }
@@ -61,7 +63,7 @@ class DashboardScreenState extends State<DashboardScreen>{
   Future<String> onLoad() async{
     try{
       return Future<String>.delayed(
-        const Duration(seconds: 2),
+        const Duration(seconds: 0),
         () async {
           if(invoice == null){
             var jsonInvoice = json.decode(await getJson());
@@ -86,23 +88,210 @@ class DashboardScreenState extends State<DashboardScreen>{
       future: onLoad(),
       builder: (ctx,snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
-            return const Center(
-              child: CircularProgressIndicator(color: Colors.greenAccent),
+            return Center(
+              heightFactor:  15,
+              child: const CircularProgressIndicator(color: Colors.greenAccent),
             );
           }
 
           if(snapshot.error != null){
             return const Center(
+              heightFactor:  15,
               child: Text("Terjadi Kesalahan",style : TextStyle(color: Colors.red)),
             );
           }   
 
-         return Padding(
+         return Padding(  
           padding: const EdgeInsets.only(top: 10,right : 10,left: 10,bottom : 50),
           child: RefreshIndicator(
             onRefresh: () async => onLoad(),            
             child : invoice != null 
-              ? const Text("Invoice Found")
+              ? Container(alignment : Alignment.center,child : Column(
+                children: [               
+                Container(
+                  // clipBehavior: Clip.hardEdge,
+                  width : 350,
+                  margin: const EdgeInsets.only(top : 30),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,                    
+                    borderRadius: const BorderRadius.only(
+                      topLeft : Radius.circular(20),
+                      topRight : Radius.circular(20),
+                      bottomLeft: Radius.circular(20),
+                      bottomRight : Radius.circular(20)
+                    ),
+                    color : Colors.white,
+                    boxShadow:  [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 1,
+                          blurRadius: 5,
+                          offset: const Offset(0, 1), // changes position of shadow
+                        )
+                      ],
+                  ),
+                  child : Column(
+                    children: [
+                      Container(
+                        height : 200,
+                        clipBehavior: Clip.hardEdge,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.rectangle,                    
+                          borderRadius: BorderRadius.only(
+                            topLeft : Radius.circular(20),
+                            topRight : Radius.circular(20),
+                          )                                                
+                        ),
+                        child : Image.asset(
+                          'images/product-1.png',
+                          alignment: Alignment.topCenter,
+                          width: double.infinity,
+                          height: 200,
+                          fit: BoxFit.contain,
+                        )
+                      ),
+
+                    Container(  
+                      clipBehavior: Clip.none,
+                      height: 10,
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent
+                      ),
+                      child : Stack(
+                        clipBehavior: Clip.none,
+                        children : [
+                          Positioned(
+                            top : -20,
+                            right: -10,        
+                            child : Container(
+                              constraints: const BoxConstraints(
+                                minWidth: 120,
+                              ),
+                              alignment: Alignment.center,
+                              decoration : BoxDecoration(
+                                color: Colors.yellow[800],
+                                shape: BoxShape.rectangle,                    
+                                borderRadius: const BorderRadius.only(topLeft : Radius.circular(10),bottomLeft : Radius.circular(10)),              
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.3),
+                                    spreadRadius: 3,
+                                    blurRadius: 5,
+                                    offset: const Offset(0, 3), // changes position of shadow
+                                  )
+                                ],
+                              ),                            
+                              child : const Padding(
+                                padding : EdgeInsets.only(top : 10,bottom : 10,left : 10,right : 10),
+                                child : Text("Pending",style: TextStyle(fontWeight: FontWeight.bold,color : Colors.white))                               
+                              )
+                            ) 
+                          )
+                        ]
+                      )
+                    ),
+
+                    SizedBox(        
+                      width : double.infinity,        
+                      child : Padding(
+                        padding: const EdgeInsets.all(15),
+                          child : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.only(top : 5,bottom: 5),
+                                child : Text("Address",style : TextStyle(fontSize: 20,fontWeight: FontWeight.bold))
+                              ),
+                              Padding( 
+                                padding : EdgeInsets.only(top : 5,bottom: 5),
+                                child : Text("Rp 50.000.00 Perjam",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color : Colors.green))
+                              ),
+                              Padding( 
+                                padding : EdgeInsets.only(top : 5,bottom: 5),
+                                child : Text("Total : Rp 50.000.00 - (1 jam)",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold))
+                              ),
+                              Padding(
+                                padding : EdgeInsets.only(top : 10,bottom: 5),
+                                child : Text("Tanggal Mulai : 2020-09-09 00:08:00",style : TextStyle(fontSize:  12,color : Colors.grey))
+                              ),
+                              Padding( 
+                                padding: EdgeInsets.only(top : 5,bottom: 5),
+                                child : Text("Dibuat Pada : 2020-09-09 00:00:00",style : TextStyle(fontSize: 12,color : Colors.grey))
+                              )
+                            ]
+                          )
+                        )
+                      )
+                  ])
+                ),
+
+                Container(
+                    alignment : Alignment.center,
+                    width : 350,
+                    margin: const EdgeInsets.only(top : 30),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,                    
+                      borderRadius: const BorderRadius.only(
+                        topLeft : Radius.circular(10),
+                        topRight : Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight : Radius.circular(10)
+                      ),
+                      color : Colors.white,
+                      boxShadow:  [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 1,
+                          blurRadius: 5,
+                          offset: const Offset(0, 1), // changes position of shadow
+                        )
+                      ]),
+                      child: Padding(padding : EdgeInsets.all(20),child : Column(children: [
+                       Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding : EdgeInsets.only(right: 5,left : 5),
+                                child : Column(children: [
+                                  Text("2",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
+                                  Divider(thickness : 0),
+                                  Text("Hari",style : TextStyle(fontSize :10))
+                                ])
+                              ),
+                                Padding(
+                                padding : EdgeInsets.only(right: 5,left : 5),
+                                child : Column(children: [
+                                  Text("12",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
+                                  Divider(thickness : 0),
+                                  Text("Jam",style : TextStyle(fontSize :10))
+                                ])
+                              ),
+                                Padding(
+                                padding : EdgeInsets.only(right: 5,left : 5),
+                                child : Column(children: [
+                                  Text("40",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
+                                  Divider(thickness : 0),
+                                  Text("Menit",style : TextStyle(fontSize :10))
+                                ])
+                              ),
+                              Padding(
+                                padding : EdgeInsets.only(right: 5,left : 5),
+                                child : Column(children: [
+                                  Text("20",style : TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
+                                  Divider(thickness : 0),
+                                  Text("Detik",style : TextStyle(fontSize :10))
+                                ])
+                              ),
+                        ]),                        
+                        Container(
+                          margin : EdgeInsets.only(top : 10,bottom : 10),
+                          child : Text("Menunggu divalidasi admin",style : TextStyle(fontSize :10))
+                        )
+                    ])
+                  ))
+                ]))              
               : Container(
                 margin: const EdgeInsets.only(top : 100),
                 child : Column(

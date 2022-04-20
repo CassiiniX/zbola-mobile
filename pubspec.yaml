@@ -71,7 +71,8 @@ flutter:
     - images/404.png
     - images/invoice-404.png
     - images/default.png
-
+    - images/product-1.png
+    
     - json/invoice.json
     
   #   - images/a_dot_burr.jpeg
