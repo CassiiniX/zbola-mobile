@@ -8,7 +8,11 @@ PreferredSizeWidget defaultAppBar(String title,BuildContext context){
         title : Container(
           alignment: Alignment.center,
           child : Text(title)
-        ),   
+        ),  
+        // leading: IconButton(
+        //   icon: const Icon(Icons.align_horizontal_left),
+        //   onPressed: () => Scaffold.of(context).openDrawer(),
+        // ), 
         actions: <Widget>[
           IconButton(
             iconSize: 30,
