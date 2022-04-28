@@ -72,6 +72,8 @@ flutter:
     - images/invoice-404.png
     - images/default.png
     - images/product-1.png
+    - images/modal-payment.png
+    - images/modal-review.png
     
     - json/invoice.json
     
