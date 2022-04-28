@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import "./invoice-bank.modal.dart";
+import 'dart:io';
 
 // ignore: non_constant_identifier_names
 Widget InvoicePaymentModal(BuildContext context){    
@@ -54,30 +55,11 @@ Widget InvoicePaymentModal(BuildContext context){
             )
           ),
 
-          Container(
-            decoration: const BoxDecoration(color: Colors.transparent),
-            child : Column(
-              children: [                               
-                Container(
-                  constraints: BoxConstraints(minHeight: 100,maxWidth: 400),
-                  child: InvoicePaymentModalScreen(context)
-                ),
-                Container(
-                  margin: EdgeInsets.only(top : 20),
-                  child : TextButton(
-                    child: Text("Bank Info"),
-                    onPressed: (){
-                    showModalBottomSheet(      
-                      backgroundColor: Colors.transparent,         
-                      context: context,
-                      isScrollControlled: true,
-                      builder: (BuildContext context) => InvoiceBankModal(context)                
-                    );   
-                  },)                 
-                )
-              ]
-            )
-          ),        
+          Expanded(child: Container(
+            decoration: const BoxDecoration(color: Colors.transparent),      
+            constraints: BoxConstraints(minHeight: 100,maxWidth: 400),
+            child: InvoicePaymentModalScreen(context)                                      
+          )),                                                            
         ]
       )
     ),                      
@@ -97,6 +79,20 @@ class InvoicePaymentModalScreen extends StatefulWidget{
 
 class InvoicePaymentModalScreenState extends State<InvoicePaymentModalScreen> {
   final BuildContext parentContext;
+  final ImagePicker _picker = ImagePicker();
+  File? uploadimage; 
+
+  Future<void> chooseImage() async {        
+    var picker = await _picker.pickImage(
+      source: ImageSource.gallery
+    );
+        
+    setState(() {
+      uploadimage = File(picker!.path);
+    });
+  }
+
+ Future<void> uploadImage() async {}
 
   InvoicePaymentModalScreenState(this.parentContext);
 
@@ -108,8 +104,8 @@ class InvoicePaymentModalScreenState extends State<InvoicePaymentModalScreen> {
   Widget build(BuildContext context){
      return Form(
         key: formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
+        child:  ListView(
+          shrinkWrap: true,
           children: [            
             Center(child: Text("Pembayaran",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)),
 
@@ -135,6 +131,39 @@ class InvoicePaymentModalScreenState extends State<InvoicePaymentModalScreen> {
                   },
                 )
               ),
+
+            Padding(padding: EdgeInsets.only(top :20),),
+
+          uploadimage == null 
+            ? Container()
+            : Container(     
+              constraints: BoxConstraints(maxHeight: 100,minHeight: 0),        
+              child: Image.file(
+                    uploadimage!,
+                    alignment: Alignment.center,
+                    width: 100,
+                    errorBuilder: (_ctx,_ob,_tr){                    
+                      return Image.asset(
+                        'images/404.png',
+                        alignment: Alignment.center,
+                        width: 100,
+                      );
+                    },                        
+                )
+            ),
+
+            Padding(padding: EdgeInsets.only(top :20),),
+
+            ElevatedButton(        
+                style : ElevatedButton.styleFrom(              
+                  onPrimary: Colors.white,          
+                  textStyle: const TextStyle(fontSize: 14),
+                  fixedSize : const Size(130,40),
+                  shape: const StadiumBorder()
+                ),
+                onPressed: () => chooseImage(),              
+                child : Text("Upload")
+            ),
 
             Padding(padding: EdgeInsets.only(top :20),),
 
@@ -165,8 +194,24 @@ class InvoicePaymentModalScreenState extends State<InvoicePaymentModalScreen> {
                   },
                   child : Text("Kirim")
                 ),
+
+                
               ]
             ),            
+         
+            Container(
+                  margin: EdgeInsets.only(top : 20),
+                  child : TextButton(
+                    child: Text("Bank Info"),
+                    onPressed: (){
+                    showModalBottomSheet(      
+                      backgroundColor: Colors.transparent,         
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (BuildContext context) => InvoiceBankModal(context)                
+                    );   
+                  },)                 
+                )
           ],
         ),
     );

@@ -52,17 +52,154 @@ Widget InvoiceBankModal(BuildContext context){
             )
           ),
 
-          Container(
+          Expanded(child: Container(
             decoration: const BoxDecoration(color: Colors.transparent),
-            child : Column(
-              children: [                               
-                Container(
+            child : Container(
                   constraints: BoxConstraints(minHeight: 100,maxWidth: 400),
-                  child: Text("Invoice bank modal")
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      Center(child: Text("Bank Info",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)),
+
+                      Padding(padding: EdgeInsets.only(top :20),),
+
+                      Container(
+                          decoration: BoxDecoration(              
+                          color : Colors.white,
+                          boxShadow:  [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: const Offset(0, 1), 
+                            )
+                          ],
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Bank"),
+                            Padding(padding: EdgeInsets.only(top :20),),
+                            Text("Bank Account"),
+                            Text("Bank Nomor")
+                          ]
+                        )),
+                      ),
+                      Padding(padding: EdgeInsets.only(top :20),),
+
+                        Container(
+                          decoration: BoxDecoration(              
+                          color : Colors.white,
+                          boxShadow:  [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: const Offset(0, 1), 
+                            )
+                          ],
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Bank"),
+                            Padding(padding: EdgeInsets.only(top :20),),
+                            Text("Bank Account"),
+                            Text("Bank Nomor")
+                          ]
+                        )),
+                      ),
+                      Padding(padding: EdgeInsets.only(top :20),),
+
+                      Container(
+                          decoration: BoxDecoration(              
+                          color : Colors.white,
+                          boxShadow:  [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: const Offset(0, 1), 
+                            )
+                          ],
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Bank"),
+                            Padding(padding: EdgeInsets.only(top :20),),
+                            Text("Bank Account"),
+                            Text("Bank Nomor")
+                          ]
+                        )),
+                      ),
+
+                       Padding(padding: EdgeInsets.only(top :20),),
+
+                      Container(
+                          decoration: BoxDecoration(              
+                          color : Colors.white,
+                          boxShadow:  [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: const Offset(0, 1), 
+                            )
+                          ],
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Bank"),
+                            Padding(padding: EdgeInsets.only(top :20),),
+                            Text("Bank Account"),
+                            Text("Bank Nomor")
+                          ]
+                        )),
+                      ),
+
+                       Padding(padding: EdgeInsets.only(top :20),),
+
+                      Container(
+                          decoration: BoxDecoration(              
+                          color : Colors.white,
+                          boxShadow:  [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: const Offset(0, 1), 
+                            )
+                          ],
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Bank"),
+                            Padding(padding: EdgeInsets.only(top :20),),
+                            Text("Bank Account"),
+                            Text("Bank Nomor")
+                          ]
+                        )),
+                      ),
+
+
+                    ],
+                  )
                 )                 
-              ]
-            )
-          ),        
+            
+          )),        
         ]
       )
     ),                      
