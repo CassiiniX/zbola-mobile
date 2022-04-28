@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 
 import './providers/user.dart';
 import './providers/notification.dart';
+import './providers/field.dart';
+import './providers/manual-payment-history.dart';
 
 import "./pages/signin.dart";
 import "./pages/signup.dart";
@@ -43,6 +45,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => NotificationProvider()
         ),      
+        ChangeNotifierProvider(
+          create: (context) => FieldProvider()
+        ),  
+        ChangeNotifierProvider(
+          create: (context) => ManualPaymentHistoryProvider()
+        )
       ],
       child : MaterialApp(
         routes: {

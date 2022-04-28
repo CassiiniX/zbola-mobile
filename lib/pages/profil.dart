@@ -175,11 +175,11 @@ class _ProfilUpdatePhoto extends State<ProfilUpdatePhoto>{
                     child :ElevatedButton(                                                
                       style: ElevatedButton.styleFrom(                        
                         primary: Colors.white,
-                        shape: CircleBorder(),
-                        padding: EdgeInsets.all(15),  
+                        shape: const CircleBorder(),
+                        padding: const  EdgeInsets.all(15),  
                       ),
                       onPressed: () => chooseImage(),
-                      child : Icon(Icons.edit,color: Colors.blueAccent,size: 28,),                                                                      
+                      child : const Icon(Icons.edit,color: Colors.blueAccent,size: 28,),                                                                      
                     )                      
                   ),
                   Positioned(                
@@ -191,11 +191,11 @@ class _ProfilUpdatePhoto extends State<ProfilUpdatePhoto>{
                         : ElevatedButton(                                                
                           style: ElevatedButton.styleFrom(                        
                             primary: Colors.white,
-                            shape: CircleBorder(),
-                          padding: EdgeInsets.all(15),  
+                            shape: const CircleBorder(),
+                          padding: const EdgeInsets.all(15),  
                           ),
                           onPressed: () => print("Testing"),
-                          child : Icon(Icons.save,color: Colors.blueAccent,size: 28,),                                                                                                         
+                          child : const Icon(Icons.save,color: Colors.blueAccent,size: 28,),                                                                                                         
                         ),                      
                     )  
                   ),                    

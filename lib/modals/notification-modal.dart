@@ -225,6 +225,7 @@ class NotificationModalScreenState extends State<NotificationModalScreen>{
                       ]
                     );
                   }
+                  
                   return mainNotification;
                 }
               )
