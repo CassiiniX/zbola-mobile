@@ -11,6 +11,7 @@ import "../providers/manual-payment-history.dart";
 
 import './signin.dart';
 import "../modals/manual-payment-history-search.modal.dart";
+import "../modals/manual-payment-history-detail.modal.dart";
 
 // ignore: must_be_immutable
 class ManualPaymentHistory extends StatelessWidget{
@@ -152,24 +153,31 @@ class ManualPaymentHistoryScreenState extends State<ManualPaymentHistoryScreen>{
                     itemCount : manualPaymentHistory.items.length,
                     itemBuilder :(ctx,i){  
                       var mainContainer =  Container(
-                          alignment : Alignment.center,
                           child : Column(
-                          children: [               
-                            Container(
-                              // clipBehavior: Clip.hardEdge,
-                              width : 350,
-                              margin: const EdgeInsets.only(top : 30),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,                    
-                                borderRadius: const BorderRadius.only(
-                                  topLeft : Radius.circular(10),
-                                  topRight : Radius.circular(10),
-                                  bottomLeft: Radius.circular(10),
-                                  bottomRight : Radius.circular(10)
-                                ),
-                                color : Colors.white,
-                                boxShadow:  [
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [  
+                              GestureDetector(
+                              onTap: (){
+                                  showModalBottomSheet(      
+                                    backgroundColor: Colors.transparent,         
+                                    context: parentContext,
+                                    isScrollControlled: true,
+                                    builder: (BuildContext context) => ManualPaymentHistoryDetailModal(context)                
+                                  );
+                              },  
+                              child : Container(
+                                width : 350,
+                                margin: const EdgeInsets.only(top : 50),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,                    
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft : Radius.circular(10),
+                                    topRight : Radius.circular(10),
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight : Radius.circular(10)
+                                  ),
+                                  color : Colors.white,
+                                  boxShadow:  [
                                     BoxShadow(
                                       color: Colors.grey.withOpacity(0.2),
                                       spreadRadius: 1,
@@ -177,120 +185,96 @@ class ManualPaymentHistoryScreenState extends State<ManualPaymentHistoryScreen>{
                                       offset: const Offset(0, 1), // changes position of shadow
                                     )
                                   ],
-                              ),
-                              child : Column(
-                                children: [
+                                ),
+                                child : Padding(padding: EdgeInsets.all(10),child : Column(
+                                  
+                                  children: [   
+                                    
+
                                   Container(
-                                    height : 200,
+                                    height : 150,
                                     clipBehavior: Clip.hardEdge,
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.rectangle,                    
                                       borderRadius: BorderRadius.only(
-                                        topLeft : Radius.circular(10),
-                                        topRight : Radius.circular(10),
+                                        topLeft : Radius.circular(20),
+                                        topRight : Radius.circular(20),
                                       )                                                
                                     ),
                                     child : Image.asset(
                                       'images/product-1.png',
-                                      alignment: Alignment.topCenter,
                                       width: double.infinity,
-                                      height: 200,
-                                      fit: BoxFit.contain,
+                                      height: 150,
+                                      fit: BoxFit.contain,                                    
                                     )
                                   ),
 
-                                Container(  
-                                  clipBehavior: Clip.none,
-                                  height: 10,
-                                  width: double.infinity,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.transparent
-                                  ),
-                                  child : Stack(
+
+                                  Container(  
                                     clipBehavior: Clip.none,
-                                    children : [
-                                      Positioned(
-                                        top : -20,
-                                        right: -10,        
-                                        child : Container(
-                                          constraints: const BoxConstraints(
-                                            minWidth: 120,
-                                          ),
-                                          alignment: Alignment.center,
-                                          decoration : BoxDecoration(
-                                            color: Colors.yellow[800],
-                                            shape: BoxShape.rectangle,                    
-                                            borderRadius: const BorderRadius.only(topLeft : Radius.circular(10),bottomLeft : Radius.circular(10)),              
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey.withOpacity(0.3),
-                                                spreadRadius: 3,
-                                                blurRadius: 5,
-                                                offset: const Offset(0, 3), // changes position of shadow
-                                              )
-                                            ],
-                                          ),                            
-                                          child : const Padding(
-                                            padding : EdgeInsets.only(top : 10,bottom : 10,left : 10,right : 10),
-                                            child : Text("Pending",style: TextStyle(fontWeight: FontWeight.bold,color : Colors.white))                               
-                                          )
-                                        ) 
-                                      ),
-                                      Positioned(    
-                                        top : -20,                        
-                                        left : -20,
-                                        child : ElevatedButton(                                                
-                                          style: ElevatedButton.styleFrom(                        
-                                            primary: Colors.white,
-                                            shape: const CircleBorder(),
-                                          padding: const EdgeInsets.all(16),  
-                                          ),
-                                          onPressed: (){
-                                            Navigator.of(parentContext).pushReplacementNamed("/field-detail");
-                                          },
-                                          child : const Icon(Icons.shopping_basket,color: Colors.blueGrey,size: 28,),                                                                                                         
-                                        ),      
-                                      )
-                                    ]
-                                  )
-                                ),
-
-                                SizedBox(        
-                                  width : double.infinity,        
-                                  child : Padding(
-                                    padding: const EdgeInsets.all(15),
-                                      child : Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(top : 5,bottom: 5),
-                                            child : Text("Address"+i.toString(),style : TextStyle(fontSize: 20,fontWeight: FontWeight.bold))
-                                          ),
-                                          Padding( 
-                                            padding : EdgeInsets.only(top : 5,bottom: 5),
-                                            child : Text("Rp 50.000.00 Perjam",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color : Colors.green))
-                                          ),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            children: [
-                                              Icon(Icons.star,color : Colors.yellowAccent),
-                                              Icon(Icons.star,color : Colors.yellowAccent),
-                                              Icon(Icons.star,color : Colors.yellowAccent),
-                                            ],
-                                          )                             
-                                        ]
-                                      )
+                                    height: 10,
+                                    width: double.infinity,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.transparent
+                                    ),
+                                    child : Stack(
+                                      clipBehavior: Clip.none,
+                                      children : [
+                                        Positioned(
+                                          top : -20,
+                                          right : 0,
+                                          child : Container(
+                                            constraints: const BoxConstraints(
+                                              minWidth: 120,
+                                            ),
+                                            alignment: Alignment.center,
+                                            decoration : BoxDecoration(
+                                              color: Colors.yellow[800],
+                                              shape: BoxShape.rectangle,                    
+                                              borderRadius: const BorderRadius.only(topLeft : Radius.circular(10),bottomLeft : Radius.circular(10)),              
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey.withOpacity(0.3),
+                                                  spreadRadius: 3,
+                                                  blurRadius: 5,
+                                                  offset: const Offset(0, 3), // changes position of shadow
+                                                )
+                                              ],
+                                            ),                            
+                                            child : const Padding(
+                                              padding : EdgeInsets.only(top : 10,bottom : 10,left : 10,right : 10),
+                                              child : Text("Pending",style: TextStyle(fontWeight: FontWeight.bold,color : Colors.white))                               
+                                            )
+                                          ) 
+                                        ),                                       
+                                      ]
                                     )
+                                  ),         
+
+                                  Padding(
+                                    padding: EdgeInsets.only(top : 20),
+                                    child : Text("Address"+i.toString(),style : TextStyle(fontSize: 13))
+                                  ),
+
+                                  Row(
+                                    mainAxisAlignment : MainAxisAlignment.end, 
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(10),
+                                        child : Text("1 Jam yang lalu",style : TextStyle(fontSize: 13))
+                                      ),
+                                    ],
                                   )
-                              ])
-                            ),
+                      
+                              ]))
+                            )),
                           ])
                         );             
 
                       if(manualPaymentHistory.items.length == (i+1)){
                         return Column(         
                           key : ValueKey(i),           
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children : [
                             mainContainer,
 
