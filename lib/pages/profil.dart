@@ -171,29 +171,31 @@ class _ProfilUpdatePhoto extends State<ProfilUpdatePhoto>{
                   ),
                   Positioned(
                     right: 0,
-                    bottom : 10,
-                    child :ElevatedButton(                          
-                      style: ElevatedButton.styleFrom(
+                    bottom : 20,
+                    child :ElevatedButton(                                                
+                      style: ElevatedButton.styleFrom(                        
                         primary: Colors.white,
-                        fixedSize : const Size(10,45),                          
+                        shape: CircleBorder(),
+                        padding: EdgeInsets.all(15),  
                       ),
                       onPressed: () => chooseImage(),
-                      child : Icon(Icons.edit,color: Colors.blueAccent,size: 20,),                                                                      
+                      child : Icon(Icons.edit,color: Colors.blueAccent,size: 28,),                                                                      
                     )                      
                   ),
-                  Positioned(
+                  Positioned(                
+                    bottom : 20,
                     child: SizedBox(                         
                       width: 100,
                       child: uploadimage == null
                         ? Container() 
-                        : OutlinedButton(
-                          onPressed: () => uploadImage(),
-                          child : Row(
-                            children : const [
-                              Icon(Icons.save),                      
-                              Text("Simpan")
-                            ]
-                          )
+                        : ElevatedButton(                                                
+                          style: ElevatedButton.styleFrom(                        
+                            primary: Colors.white,
+                            shape: CircleBorder(),
+                          padding: EdgeInsets.all(15),  
+                          ),
+                          onPressed: () => print("Testing"),
+                          child : Icon(Icons.save,color: Colors.blueAccent,size: 28,),                                                                                                         
                         ),                      
                     )  
                   ),                    
