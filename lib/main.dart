@@ -8,6 +8,7 @@ import './providers/notification.dart';
 import './providers/field.dart';
 import './providers/manual-payment-history.dart';
 import './providers/invoice-history.dart';
+import "./providers/review.dart";
 
 import "./pages/signin.dart";
 import "./pages/signup.dart";
@@ -54,6 +55,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => InvoiceHistoryProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ReviewProvider()
         )
       ],
       child : MaterialApp(
